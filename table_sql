@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS fichier ;
+CREATE TABLE fichier (IdFIchier_fichier BIGINT(55) AUTO_INCREMENT NOT NULL,
+nomFichier_fichier TINYBLOB,
+dateFichier_fichier TIMESTAMP,
+tailleFichier_fichier INT(55),
+urlAlea_fichier TINYBLOB,
+PRIMARY KEY (IdFIchier_fichier)) ENGINE=InnoDB;
+
