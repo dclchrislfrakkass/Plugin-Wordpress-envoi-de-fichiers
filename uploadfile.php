@@ -62,8 +62,7 @@
                         $lien = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}fichier where idFichier_fichier =$idLienB");
                         $urlFull = $lien->nomFichier_fichier;
                         //affiche l'id du dernier upload
-                        echo $resultat->idFichier_fichier; 
-                        
+                        echo $resultat->idFichier_fichier;                         
                         
                         echo '</br>';
                         //affiche le lien en clair du dernier post

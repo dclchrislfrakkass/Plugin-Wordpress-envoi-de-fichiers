@@ -10,5 +10,3 @@ function shortcode_uploadF(){
     include "uploadfile.php";
 }
 add_shortcode('uploadF', 'shortcode_uploadF');
-
-
