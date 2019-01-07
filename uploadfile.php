@@ -38,8 +38,6 @@
                     // ' a été déplacé vers '.$repertoireDestination.$nomDestination;                      
                     
                     // ));
-
-                    //Connexion et envoi des données sur la base de données
                     
                     global $wpdb;
                     $wpdb->insert(
@@ -57,28 +55,27 @@
                             '%d'
                             )
                         );
-                        //affiche tous les fichiers postés avec leurs id
-                        $resultats = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fichier");
-                        foreach ($resultats as $post) {
-                            echo $repertoireDestination.$post->nomFichier_fichier.'</br>'.$post->idFichier_fichier.'</br>';
-                   
-                            echo '</br>';
-                            // echo $Get[]
-                            
-                            // $table = $wpdb-> wp_fichier;
-                            // $data = array ('idFichier' => '', 'nomFichier_fichier'=> $nomOrigine, 'dateFichier_fichier' =>'', 'tailleFichier_fichier' => $tailleFichier  );
-                            // $wpdb -> insert($table,$data);
-                            // var_dump($table);
-                            // var_dump ($nomOrigine);
-                            
-
-                        //Envoi un mail avec les infos 
-                            $mail = $_POST['mailToSend'];
-                            $passage_ligne = "\r\n";
-                            $boundary = '-----='.md5(rand());
-                            $subjet = 'Un fichier vous attends!';
-                            
-                        };
+                        
+                        // $resultats = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}fichier");
+                        $resultat = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}fichier ORDER BY idFichier_fichier desc limit 1");
+                        $idLienB = $resultat->idFichier_fichier;
+                        $lien = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}fichier where idFichier_fichier =$idLienB");
+                        $urlFull = $lien->nomFichier_fichier;
+                        //affiche l'id du dernier upload
+                        echo $resultat->idFichier_fichier; 
+                        
+                        
+                        echo '</br>';
+                        //affiche le lien en clair du dernier post
+                        echo $repertoireDestination.$urlFull;                            // echo $Get[]
+                        
+                        
+                        $mail = $_POST['mailToSend'];
+                        $passage_ligne = "\r\n";
+                        $boundary = '-----='.md5(rand());
+                        $subjet = 'Un fichier vous attends!';
+                        
+                        
                         
                         
                         //=====Création du header de l'e-mail
